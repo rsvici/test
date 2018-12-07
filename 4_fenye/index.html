@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>页面分页</title>
+  <style type="text/css">
+    * {
+      font-size: 10.2pt;
+      font-family: tahoma;
+      line-height: 150%;
+    }
+
+    .divContent {
+      border: 1px solid red;
+      background-color: #FFD2D3;
+      width: 500px;
+      word-break: break-all;
+      margin: 10px 0px 10px;
+      padding: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>标题</h1>
+  <div id="divPagenation">
+  </div>
+  <div id="divContent">
+  </div>
+
+  <script type="text/javascript">
+    s =
+      `<div class=WordSection1 style='layout-grid:15.6pt'>
+
+<p class=MsoNormal style='text-indent:28.75pt;line-height:27.0pt'><b><span style='font-size:16.0pt;font-family:仿宋_GB2312'>曹彬审理的（<span
+       lang=EN-US>2009</span>）普民三（民）初字第<span lang=EN-US>894</span>号宋慕东诉朱青华房屋买卖合同无效案</span></b></p>
+
+<p class=MsoNormal style='text-indent:26.95pt;line-height:27.0pt'><b><span lang=EN-US style='font-size:15.0pt;font-family:"??",serif'>&nbsp;</span></b></p>
+
+<p class=MsoNormal style='text-indent:26.95pt;line-height:27.0pt'><b><span style='font-size:15.0pt;font-family:宋体'>【基本案情】</span></b></p>
+
+<p class=MsoNormal style='text-indent:32.25pt;line-height:27.0pt;layout-grid-mode:
+char'><span style='font-size:15.0pt;font-family:宋体'>原告：宋慕东</span></p>
+
+<p class=MsoNormal style='text-indent:32.25pt;line-height:27.0pt;layout-grid-mode:
+char'><span style='font-size:15.0pt;font-family:宋体'>被告：朱青华</span></p>
+
+<p class=MsoNormal style='text-indent:32.25pt;line-height:27.0pt;layout-grid-mode:
+char'><span style='font-size:15.0pt;font-family:宋体'>第三人：张良</span></p>
+
+<p class=MsoNormal style='text-indent:32.25pt;line-height:27.0pt;layout-grid-mode:
+char'><span style='font-size:15.0pt;font-family:宋体'>第三人：张璐禕</span></p>
+
+<p class=MsoNormal style='text-indent:32.0pt;line-height:27.0pt'><span style='font-size:15.0pt;font-family:宋体'>座落于上海市平利路<span
+     lang=EN-US>41</span>弄<span lang=EN-US>5</span>号<span lang=EN-US>501-502</span>室房屋原属宋慕东所有。<span lang=EN-US>2007</span>年<span
+     lang=EN-US>3</span>月<span lang=EN-US>8</span>日，宋慕东向朱青华出具“证明”一张，内容为“平利路<span lang=EN-US>41</span>弄<span lang=EN-US>5</span>号<span
+     lang=EN-US>501</span>室的产权房售给朱青华与任何人无关”；<span lang=EN-US> 2008<span lang=EN-US><span lang=EN-US>年4</span></span><span
+       lang=EN-US><span lang=EN-US>月10</span></span><span lang=EN-US><span lang=EN-US>日</span></span><span lang=EN-US>，宋慕东、朱青华签订《上海市房地产买卖合同》一份，约定宋慕东将上述房产以人民币43</span></span>万元向朱青华出售。<span
+     lang=EN-US>2008</span>年<span lang=EN-US>4</span>月<span lang=EN-US>28</span>日，宋慕东向朱青华出具“收条”一张，内容为“今收到朱青华购房定金人民币叁万元正”。<span
+     lang=EN-US> 2008<span lang=EN-US><span lang=EN-US>年5</span></span><span lang=EN-US><span lang=EN-US>月11</span></span><span
+       lang=EN-US><span lang=EN-US>日</span></span><span lang=EN-US>，宋慕东向朱青华出具“收据”一张，内容为“今收到售房款人民币肆拾叁万元整”。
+        2008</span></span>年<span lang=EN-US>5</span>月、<span lang=EN-US>2008</span>年<span lang=EN-US>12</span>月<span lang=EN-US>9</span>日，宋慕东向朱青华出具字据，大致内容为向朱青华转交房屋及索要补偿费用等。<span
+     lang=EN-US>2008</span>年<span lang=EN-US>5</span>月<span lang=EN-US>12</span>日，宋慕东、朱青华办理房屋产权转让申请。<span lang=EN-US>2008</span>年<span
+     lang=EN-US>5</span>月<span lang=EN-US>28</span>日，朱青华取得系争房屋产权。<span lang=EN-US>2009</span>年<span lang=EN-US>2</span>月<span
+     lang=EN-US>22</span>日，朱青华与第三人签订了房屋买卖合同，将房屋向第三人出售，<span lang=EN-US>2009</span>年<span lang=EN-US>3</span>月<span lang=EN-US>25</span>日，第三人取得系争房屋产权，现第三人已入住该房屋。<span
+     lang=EN-US>2009</span>年<span lang=EN-US>3</span>月<span lang=EN-US>31</span>日，宋慕东诉至法院，请求判决如其诉请。</span></p>
+
+<p class=MsoNormal style='text-indent:32.0pt;line-height:27.0pt'><span style='font-size:15.0pt;font-family:宋体'>另朱青华自认，其曾陪同宋慕东补办身份证及系争房屋房产证，其中身份证补办申请因宋慕东书写困难，故由朱青华代宋慕东所书。</span></p>
+
+<p class=MsoNormal style='text-indent:32.0pt;line-height:27.0pt'><span style='font-size:15.0pt;font-family:宋体'>审理中，当事人就宋慕东在房屋交易时及当前的精神状态、民事行为能力提起司法鉴定，经本院委托，司法鉴定科学技术研究所司法鉴定中心于<span
+     lang=EN-US>2009</span>年<span lang=EN-US>12</span>月<span lang=EN-US>14</span>日出具了“司鉴中心<span lang=EN-US>[2009]</span>精鉴字第<span
+     lang=EN-US>285</span>号”鉴定意见书，结论为：宋慕东目前对本案应评定为无民事行为能力及无诉讼能力。同时，该中心出具“撤案情况说明”一份，认为据目前提供的有关资料分析，尚缺乏足以明确鉴定宋慕东在<span
+     lang=EN-US>2008</span>年<span lang=EN-US>4</span>月<span lang=EN-US>10</span>日订立《上海市房地产买卖合同》时的精神状态及有无民事行为能力的相应资料，故对此方面的鉴定应予撤销。</span></p>
+
+<p class=MsoNormal style='text-indent:32.0pt;line-height:27.0pt'><span style='font-size:15.0pt;font-family:宋体'>庭审中，宋慕东认为，朱青华提供的落款时间为<span
+     lang=EN-US>2008</span>年<span lang=EN-US>5</span>月<span lang=EN-US>11</span>日的“收据”中全部文字、落款时间为<span lang=EN-US>2008</span>年<span
+     lang=EN-US>12</span>月<span lang=EN-US>9</span>日的字据中的签名，申请日期为<span lang=EN-US>2008</span>年<span lang=EN-US>4</span>月<span
+     lang=EN-US>14</span>日的《上海市房地产登记申请书》中“变更内容”一栏中的文字及申请人签名均非宋慕东本人所写，故提起笔迹鉴定申请，经本院委托，司法鉴定科学技术研究所司法鉴定中心出具了“司鉴中心<span
+     lang=EN-US>[2009]</span>技鉴字第<span lang=EN-US>354</span>号鉴定意见书，结论为：上述字迹均为宋慕东所写。</span></p>
+
+<p class=MsoNormal style='text-indent:32.25pt;line-height:27.0pt;layout-grid-mode:
+char'><span style='font-size:15.0pt;font-family:宋体'>此外，据相关房产登记部门备案的“上海市房地产登记申请书”载明，宋慕东曾于<span
+     lang=EN-US>2008</span>年<span lang=EN-US>4</span>月<span lang=EN-US>14</span>日向该部门申请补发房屋产证；朱青华自认其曾陪同宋慕东补办身份证及系争房屋房产证，其中身份证补办申请因宋慕东书写困难，故由朱青华代宋慕东所书。</span></p>
+
+<p class=MsoNormal style='text-indent:32.25pt;line-height:27.0pt;layout-grid-mode:
+char'><span style='font-size:15.0pt;font-family:宋体'>宋慕东诉称，其系老年痴呆症患者，宋慕东、朱青华之间有师徒关系。朱青华利用宋慕东对其的高度信任，于<span
+     lang=EN-US>2008</span>年<span lang=EN-US>4</span>月<span lang=EN-US>10</span>日让宋慕东背着子女在《上海市房地产买卖合同》上签字，将宋慕东居住的上海市平利路<span
+     lang=EN-US>41</span>弄<span lang=EN-US>5</span>号<span lang=EN-US>501-2</span>室房屋卖给朱青华。因宋慕东患病，其本人的居民身份证、户口簿及房屋产权证均由其子女保管，朱青华为达到占有房屋之目的，指导宋慕东到所在派出所与房地产交易中心补办居民身份证及房屋产权证，并在朱青华未支付任何房款的情形下，指导宋慕东书写了房款收据。因宋慕东已患精神疾病，而朱青华取得房屋产权系采用欺诈手段，为保障老年人合法权益，请求判令：双方签订的房屋买卖合同无效；朱青华将房产返还宋慕东；朱青华协助办理产权返还变更手续；本案受理费由朱青华负担。</span></p>
+
+<p class=MsoNormal style='text-indent:32.25pt;line-height:27.0pt;layout-grid-mode:
+char'><span style='font-size:15.0pt;font-family:宋体'>朱青华辩称，宋慕东、朱青华本系同事兼朋友，因宋慕东公司负债，故主动将房屋以低于市场价格向被告出售。宋慕东、朱青华之间签订的买卖合同真实有效，房款的交接于房屋交易手续办理之后，朱青华先向宋慕东支付了<span
+     lang=EN-US>3</span>万元（以下币种均为人民币），又于<span lang=EN-US>2008</span>年<span lang=EN-US>5</span>月在朱青华之姐家中以现金形式支付房款人民币<span
+     lang=EN-US>40</span>万元，其中<span lang=EN-US>15</span>万元为朱青华自筹款，<span lang=EN-US>25</span>万元为朱青华以伪造的系争房屋产证向其姐证明房屋买卖而获取的借款。此后，朱青华虽然取得了房屋，但唯恐与宋慕东子女产生矛盾，故未入住房屋即于<span
+     lang=EN-US>2009</span>年<span lang=EN-US>2</span>月将房屋向第三人出售。朱青华认为，双方之间的房屋买卖系真实意思之表示，上述事实有宋慕东向朱青华出具的房款收据、笔据等书证及证人证言相佐证。而宋慕东认为在签订买卖合同时，其患有精神疾病及被告有欺诈行为的主张缺乏证据。现房屋交易已全部履行完毕，产权亦已完成过户。</span></p>
+
+<p class=MsoNormal style='text-indent:32.0pt;line-height:27.0pt'><span style='font-size:15.0pt;font-family:宋体'>第三人张良、张璐禕提出，朱青华与第三人之间的房屋交易系通过中介完成，交易过程中的相关手续正规合法，故第三人对系争房屋属善意取得，现第三人已取得房屋产权并实际入住，宋慕东诉请缺乏证据，第三人不同意。</span></p>
+
+<p class=MsoNormal style='text-indent:32.25pt;line-height:27.0pt;layout-grid-mode:
+char'><b><span style='font-size:15.0pt;font-family:宋体'>【裁判结果】</span></b></p>
+
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+text-indent:30.0pt;line-height:27.0pt'><span
+   style='font-size:15.0pt;
+font-family:宋体'>一审法院判决：</span></p>
+
+<p class=MsoNormal style='text-indent:30.0pt;line-height:27.0pt;layout-grid-mode:
+char'><span style='font-size:15.0pt;font-family:宋体'>一、宋慕东与朱青华就上海市平利路<span
+     lang=EN-US>41</span>弄<span lang=EN-US>5</span>号<span lang=EN-US>501-2</span>室房屋所签订的《上海市房地产买卖合同》无效；</span></p>
+
+<p class=MsoNormal style='text-indent:30.0pt;line-height:27.0pt'><span style='font-size:15.0pt;font-family:宋体'>二、对宋慕东的其余诉请不予支持。</span></p>
+
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+text-indent:30.0pt;line-height:27.0pt'><span
+   style='font-size:15.0pt;
+font-family:宋体'>二审法院判决：</span></p>
+
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+text-indent:30.0pt;line-height:27.0pt'><span
+   style='font-size:15.0pt;
+font-family:宋体'>驳回上诉，维持原判。</span></p>
+
+<p class=MsoNormal style='text-indent:29.8pt;line-height:27.0pt'><b><span style='font-size:15.0pt;font-family:宋体'>【裁判理由】</span></b></p>
+
+<p class=MsoNormal style='text-indent:30.0pt;line-height:27.0pt'><span style='font-size:15.0pt;font-family:宋体'>一审法院认为，案件争议焦点主要是围绕系争房屋买卖合同是否有效以及朱青华是否向宋慕东支付了<span
+     lang=EN-US>43</span>万元房款而展开。</span></p>
+
+<p class=MsoNormal style='text-indent:30.0pt;line-height:27.0pt'><span style='font-size:15.0pt;font-family:宋体'>关于争议焦点之一，合同成立必须基于当事人合意，违反当事人真实意思表示的，应为无效合同。如有事实可表明当事人的精神状况确不适合实施签订合同等民事行为，或以当事人的精神状态而言，其签订合同时不能体现其真实意思表示的，则其订立的合同亦应归于无效。本案中，从司法鉴定部门出具的鉴定书内容可知，宋慕东在本鉴定结论出具前已具有精神状态异常之现象，并多次就医治疗，尽管对其无民事行为能力的鉴定结论成立于诉讼发生之后，但按一般病理常识及事物发展的客观规律，能推断出宋慕东系精神状态异常可能性极高的高龄老人，作出不动产买卖此类巨额标的财产转移的民事行为已经超出其认知能力之范围，不应视此行为是其真实意思表示。在此情形下，朱青华作为宋慕东的熟人，仍陪同宋慕东到派出所、房产登记部门补办身份证、房产证，甚至在无任何旁证及不聘请无利害关系见证人的情况下，私下同宋慕东进行房屋买卖交易，且明知宋慕东子女对此持反对意见而有意避开众人视线单独与宋慕东签订房地产买卖合同以及收留宋慕东签下的字据，由此造成的法律后果只能由朱青华自负。<span
+     lang=EN-US><br>
+    </span>　　关于争议焦点之二，针对朱青华提出其以现金方式向宋慕东支付<span lang=EN-US>43</span>万元房款的主张，法院认为，当今信息时代，自然人与自然人、自然人与法人、法人与法人之间正常的经济往来、正常的资金流转，依照惯例应为通过银行之信用平台，以确保交易流转中的资金更灵活、更便捷、更安全。然，朱青华为<span
+     lang=EN-US>43</span>万元巨额房款的支付流转在法庭上的陈述为：<span lang=EN-US>(</span>一<span lang=EN-US>)</span>其将自筹现金<span lang=EN-US>15</span>万元<span
+     lang=EN-US>(</span>另<span lang=EN-US>3</span>万元为定金已付<span lang=EN-US>)</span>随身携带并放置于机车内，带宋慕东一同至其姐租赁房，将其向姐借现金<span
+     lang=EN-US>25</span>万元连同上述款项共计<span lang=EN-US>40</span>万元交付宋慕东，由宋慕东当场清点后装入袋内自行领走；<span lang=EN-US>(</span>二<span
+     lang=EN-US>)</span>其为博得其姐信任、取得借款而伪造系争房屋产权证。法院认为，朱青华上述陈述有明显违背常理之处，部分陈述与查明事实相矛盾而不能自圆其说，鉴于此，法院对朱青华认为其用现金方式向宋慕东支付<span
+     lang=EN-US>43</span>万元房款的主张不予采信。<span lang=EN-US><br>
+    </span>　　综上，为维护社会的善良风俗及保障老年人的合法权益，法院对宋慕东要求确认房屋买卖合同无效的诉讼请求予以支持。根据法律规定，无效合同自始无效。合同无效后，系争房屋产权理应恢复原状，但从案件查明的事实来看，由于宋慕东的子女在过去几年中，曾疏于对年老患病父亲的日常悉心照料与监管，以至于放任系争房屋所有权转移至张良、张璐禕名下结果的发生。诉讼中，宋慕东亦无证据能佐证张良、张璐禕与朱青华之间有恶意串通转移房产的不当行为。现张良、张璐禕作为系争房屋善意买受人，有依法维护自己房屋财产之权利。因此，法院对宋慕东要求返还系争房屋的诉请难以支持。宋慕东的房产损失可另寻途径解决。<span
+     lang=EN-US><br>
+    </span>　　二审法院认为，根据司法鉴定科学技术研究所司法鉴定中心于<span lang=EN-US>2009</span>年<span lang=EN-US>7</span>月<span lang=EN-US>22</span>日对宋慕东的精神状态及诉讼能力、民事行为能力的鉴定情况，该项鉴定结论为：宋慕东目前对本案应评定为无民事行为能力及无诉讼能力。结合宋慕东<span
+     lang=EN-US>2005</span>年<span lang=EN-US>11</span>月<span lang=EN-US>25</span>日的头颅<span lang=EN-US>CT</span>显示其老年性脑改变，以及<span
+     lang=EN-US>2008</span>年<span lang=EN-US>7</span>月、<span lang=EN-US>12</span>月两次入院，被诊断为精神障碍。另根据宋慕东所在地居委会工作人员反映的情况等，原审法院认为宋慕东在与朱青华签订系争房屋的房地产买卖合同时，不能体现其真实意思表示之认定，有一定的事实依据。朱青华作为宋慕东的同事兼朋友对于宋慕东的身体状况、家庭情况应是清楚的，在宋慕东无身份证、房产证的情况下，不向宋慕东子女了解情况，就陪同宋慕东补办上述证件，代宋慕东书写补办申请，并于此后就系争房屋与宋慕东签订房地产买卖合同。朱青华的上述行为有违一个善良买受人的所为。另朱青华称其支付房款一节，提供的证据为：宋慕东出具的收条及朱青华姐姐的证人证言。朱青华陈述其自筹的房款<span
+     lang=EN-US>15</span>万元为现金，向其姐姐借款的<span lang=EN-US>25</span>万元亦为现金，且上述款项朱青华是于借款当日一并交付宋慕东，宋慕东当场清点后装入袋内自行领走。但根据朱青华提供的<span
+     lang=EN-US>2008</span>年<span lang=EN-US>5</span>月<span lang=EN-US>11</span>日收据内容为：今收到售房款<span lang=EN-US>43</span>万元，该收据内容与朱青华自述当日宋慕东仅收到<span
+     lang=EN-US>40</span>万元房款相悖。若该收据中已包含此前支付的定金，则应在该收据中备注，或是将原定金收据收回，否则朱青华所述的内容与其提供的证据并不能相互印证。且朱青华上述陈述中亦存在种种不尽合理之处，故根据现有证据，本院亦难以认定朱青华曾用现金方式向宋慕东支付过<span
+     lang=EN-US>43</span>万元房款。朱青华的上诉请求及理由缺乏事实及法律依据，不能成立。</span></p>
+
+<p class=MsoNormal style='line-height:27.0pt'><span lang=EN-US style='font-size:15.0pt;font-family:宋体'>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+</div>`;
+
+
+    //对img标签进行匹配
+    var imgReg = /(<img\s+src='\S+'\s*(\/)?>)/gi;
+    matchContent = s.match(imgReg);
+    imgContent = s;
+    if (imgReg.test(s)) {
+      //将img标签替换为*
+      imgContent = s.replace(imgReg, "*");
+    }
+
+    // 封装DHTMLpagenation
+    function DHTMLpagenation(content) {
+
+      this.content = content; // 内容
+      this.contentLength = imgContent.length; // 内容长度
+      this.pageSizeCount; // 总页数
+      this.perpageLength = 100; //default perpage byte length.
+      this.currentPage = 1; // 起始页为第1页
+      //this.regularExp=/.+[\?\&]{1}page=(\d+)/;
+      this.regularExp = /\d+/; // 建立正则表达式，匹配数字型字符串。
+
+      this.divDisplayContent;
+      this.contentStyle = null;
+      this.strDisplayContent = "";
+      this.divDisplayPagenation;
+      this.strDisplayPagenation = "";
+
+      // 把第二个参数赋给perpageLength;
+      arguments.length == 2 ? perpageLength = arguments[1] : '';
+
+      try {
+        //创建要显示的DIV
+        divExecuteTime = document.createElement("DIV");
+        document.body.appendChild(divExecuteTime);
+      } catch (e) {}
+
+      // 得到divPagenation容器。
+      if (document.getElementById("divPagenation")) {
+        divDisplayPagenation = document.getElementById("divPagenation");
+      } else {
+        try {
+          //创建分页信息
+          divDisplayPagenation = document.createElement("DIV");
+          divDisplayPagenation.id = "divPagenation";
+          document.body.appendChild(divDisplayPagenation);
+        } catch (e) {
+          return false;
+        }
+      }
+
+      // 得到divContent容器
+      if (document.getElementById("divContent")) {
+        divDisplayContent = document.getElementById("divContent");
+      } else {
+        try {
+          //创建每页显示内容的消息的DIV 
+          divDisplayContent = document.createElement("DIV");
+          divDisplayContent.id = "divContent";
+          document.body.appendChild(divDisplayContent);
+        } catch (e) {
+          return false;
+        }
+      }
+
+      DHTMLpagenation.initialize();
+      return this;
+
+    };
+
+    //初始化分页；
+    //包括把加入CSS，检查是否需要分页
+    DHTMLpagenation.initialize = function () {
+
+      divDisplayContent.className = contentStyle != null ? contentStyle : "divContent";
+
+      if (contentLength <= perpageLength) {
+        strDisplayContent = content;
+        divDisplayContent.innerHTML = strDisplayContent;
+        return null;
+      }
+
+      pageSizeCount = Math.ceil((contentLength / perpageLength));
+
+      DHTMLpagenation.goto(currentPage);
+
+      DHTMLpagenation.displayContent();
+    };
+
+    //显示分页栏
+    DHTMLpagenation.displayPage = function () {
+
+      strDisplayPagenation = "分页：";
+
+      if (currentPage && currentPage != 1) {
+        strDisplayPagenation += '<a href="javascript:void(0)" onclick="DHTMLpagenation.previous()">上一页</a>  ';
+      } else {
+        strDisplayPagenation += "上一页  ";
+      }
+
+      for (var i = 1; i <= pageSizeCount; i++) {
+        if (i != currentPage) {
+          strDisplayPagenation += '<a href="javascript:void(0)" onclick="DHTMLpagenation.goto(' + i + ');">' + i +
+            '</a>  ';
+        } else {
+          strDisplayPagenation += i + "  ";
+        }
+      }
+
+      if (currentPage && currentPage != pageSizeCount) {
+        strDisplayPagenation += '<a href="javascript:void(0)" onclick="DHTMLpagenation.next()">下一页</a>  ';
+      } else {
+        strDisplayPagenation += "下一页  ";
+      }
+
+      strDisplayPagenation += "共 " + pageSizeCount + " 页，每页" + perpageLength + " 字符，调整字符数：<input type='text' value='" +
+        perpageLength +
+        "' id='ctlPerpageLength' /><input type='button' value='确定' onclick='DHTMLpagenation.change()' />";
+
+      divDisplayPagenation.innerHTML = strDisplayPagenation;
+
+
+    };
+
+    //上一页
+    DHTMLpagenation.previous = function () {
+      DHTMLpagenation.goto(currentPage - 1);
+    };
+
+    //下一页
+    DHTMLpagenation.next = function () {
+
+      DHTMLpagenation.goto(currentPage + 1);
+    };
+
+    //跳转至某一页
+    DHTMLpagenation.goto = function (iCurrentPage) {
+      startime = new Date();
+      if (regularExp.test(iCurrentPage)) {
+        currentPage = iCurrentPage;
+
+        var tempContent = "";
+
+        //获取当前的内容 里面包含 * 
+        var currentContent = imgContent.substr((currentPage - 1) * perpageLength, perpageLength);
+
+        tempContent = currentContent;
+
+        //当前页是否有 * 获取最后一个 * 的位置 
+        var indexOf = currentContent.indexOf("*");
+
+        if (indexOf >= 0) {
+          //获取从开始位置到当前页位置的内容
+          var beginToEndContent = imgContent.substr(0, currentPage * perpageLength);
+
+          //获取开始到当前页位置的内容 中的 * 的最后的下标 
+          var reCount = beginToEndContent.split("*").length - 1;
+
+          var contentArray = currentContent.split("*");
+
+          tempContent = replaceStr(contentArray, reCount, matchContent);
+
+        }
+        //                else
+        //                {
+        //                    tempContent=imgContent.substr((currentPage-1)*perpageLength,perpageLength);
+        //                }
+
+        strDisplayContent = tempContent;
+      } else {
+        alert("页面参数错误");
+      }
+      DHTMLpagenation.displayPage();
+      DHTMLpagenation.displayContent();
+    };
+    //显示当前页内容
+    DHTMLpagenation.displayContent = function () {
+      divDisplayContent.innerHTML = strDisplayContent;
+    };
+
+    //改变每页的字节数
+    DHTMLpagenation.change = function () {
+
+      var iPerpageLength = document.getElementById("ctlPerpageLength").value;
+      if (regularExp.test(iPerpageLength)) {
+
+        //                DHTMLpagenation.perpageLength=iPerpageLength;
+        //                DHTMLpagenation.currentPage=1;
+        //                DHTMLpagenation.initialize();
+
+        DHTMLpagenation(s, iPerpageLength);
+      } else {
+        alert("请输入数字");
+      }
+    };
+
+    /*  currentArray:当前页以 * 分割后的数组
+        replaceCount:从开始内容到当前页的内容 * 的个数
+        matchArray ： img标签的匹配的内容
+    */
+    function replaceStr(currentArray, replaceCount, matchArray) {
+
+      var result = "";
+      for (var i = currentArray.length - 1, j = replaceCount - 1; i >= 1; i--) {
+
+        var temp = (matchArray[j] + currentArray[i]);
+
+        result = temp + result;
+
+        j--;
+      }
+
+      result = currentArray[0] + result;
+
+      return result;
+    }
+
+
+    DHTMLpagenation(s, 100);
+  </script>
+
+
+
+</body>
+
+</html>

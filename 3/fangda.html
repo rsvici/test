@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>百分比缩放</title>
+  <style type="text/css">
+  </style>
+</head>
+
+<body>
+  <p id="box">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur id tempore corrupti nesciunt esse, rem
+    exercitationem! Debitis quidem deserunt ab. At iusto atque neque esse nesciunt cumque provident accusantium quos.
+    Asperiores repellat optio nemo voluptates pariatur ea eos quis minus quidem eius tenetur ratione quibusdam eveniet
+    ullam reprehenderit fugit ad eum, modi itaque assumenda dignissimos! Quae ea quibusdam delectus officia.
+    Quaerat, veniam ipsum! Adipisci eos pariatur velit sed quasi ut optio sit delectus deserunt. Quisquam blanditiis
+    iusto error velit similique quia? Minus sed, animi odio explicabo natus dolorem maxime repellendus.
+    Recusandae enim quasi sed, neque adipisci voluptatibus ab. Reprehenderit aperiam praesentium, doloremque
+    reiciendis, quia corporis, mollitia earum sequi magnam ea tempora doloribus dolorum odit numquam molestiae
+    perspiciatis quam enim quae.
+    Facilis fuga eius amet cumque nesciunt maiores nulla architecto, rem omnis minus repellat beatae consectetur
+    necessitatibus itaque iure, facere ea? Unde reiciendis magnam ab, pariatur ad quia in expedita quisquam!</p>
+  <input type="text" name="ee" autocomplete="on">
+</body>
+
+</html>
+<script type="text/javascript" src="./jquery.min.js"></script>
+<script type="text/javascript">
+
+  function touchs(event){
+    console.log(222);
+    event.preventDefault();
+  }
+
+
+  var box = document.getElementById('box');
+  box.addEventListener('touchstart',touchs,false);
+</script>

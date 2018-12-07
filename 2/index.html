@@ -1,0 +1,163 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+  <title>长宁时尚地图</title>
+  <style>
+    html,
+    body,
+    #container {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .cc {
+      position: absolute;
+      color: #000000;
+      bottom: 10px;
+      left: 10px;
+    }
+
+    .amap-logo,
+    .amap-copyright {
+      display: none !important;
+    }
+  </style>
+  <script>
+    delete window.AMap;
+  </script>
+</head>
+
+<body>
+  <div id="container"></div>
+  <script src="./js/jquery.min.js"></script>
+  <script src="https://webapi.amap.com/maps?v=1.4.10&key=466fd4af47506ed3bdce5970ab4cb2a8&plugin=Map3D"></script>
+  <script>
+    // 创建地图实例
+    var map = new AMap.Map("container", {
+      viewMode: '3D',
+      pitch: 55,
+      zoom: 18,
+      center: [121.403979, 31.211853],
+      mapStyle: 'amap://styles/normal',
+      buildingAnimation: true,
+      showIndoorMap: true,
+      indoorMap: true,
+    });
+
+
+    // // 设置光照属性/
+    map.AmbientLight = new AMap.Lights.AmbientLight([1, 1, 1], 0.9);
+    map.DirectionLight = new AMap.Lights.DirectionLight([0, -1, 1], [1, 1, 1], 0.1);
+    // // 创建Object3DLayer图层
+    var object3Dlayer = new AMap.Object3DLayer();
+    map.add(object3Dlayer);
+
+
+    // 设置边界
+    var prism = [];
+
+    function drawBounds() {
+      $.getJSON("map.json", function (resjson) {
+
+        var boundobj = [];
+        for (var i = 0, l = resjson[0].length; i < l; i++) {
+          //生成行政区划polygon
+          var bound = new AMap.LngLat(resjson[0][i].P, resjson[0][i].O);
+          boundobj.push(bound);
+        }
+
+        var height = 1000;
+        var color = 'rgba(100,255,255, 0.7)'; //rgba
+        prism = new AMap.Object3D.Prism({
+          path: boundobj,
+          height: height,
+          color: color,
+        });
+        prism.transparent = true;
+      });
+    }
+    drawBounds();
+
+    // 添加模型
+    map.plugin(["AMap.GltfLoader"], function () {
+      var hqyszx = './gltf/hqyszx.gltf';
+      var paramCity = {
+        position: new AMap.LngLat(121.40396, 31.211692),
+        scale: 18,
+        height: 120,
+        scene: 0
+      };
+
+      var gltfObj = new AMap.GltfLoader();
+
+      gltfObj.load(hqyszx, function (gltfCity) {
+        gltfCity.setOption(paramCity);
+        gltfCity.rotateX(90);
+        gltfCity.rotateY(0);
+        gltfCity.rotateZ(0);
+        object3Dlayer.add(gltfCity);
+      });
+
+    });
+    // 添加控制器
+    AMap.plugin([
+      'AMap.ControlBar',
+    ], function () {
+
+      // 添加 3D 罗盘控制
+      map.addControl(new AMap.ControlBar());
+    });
+
+    // 标识点
+    var hqyszxMarker = new AMap.Marker({
+      map: map,
+      icon: "https://webapi.amap.com/theme/v1.3/markers/n/mark_b.png",
+      position: [121.40396, 31.211692],
+      height: 350,
+    });
+    hqyszxMarker.setLabel({
+      //修改label相对于maker的位置
+      offset: new AMap.Pixel(-30, 31),
+      content: "<div class='info'>虹桥艺术中心</div>"
+    });
+
+    function showInfoM(e) {
+
+    }
+    hqyszxMarker.on('click', showInfoM);
+
+
+    // 放大缩小事件
+    map.on('zoomend', function (e) {
+      if (map.getZoom() > 16) {
+        object3Dlayer.remove(prism);
+      } else {
+        object3Dlayer.add(prism);
+      }
+    });
+
+    //点击事件
+    map.on('click', function (ev) {
+      // 触发事件的对象
+      var target = ev.target;
+
+      // 触发事件的地理坐标，AMap.LngLat 类型
+      var lnglat = ev.lnglat;
+
+      // 触发事件的像素坐标，AMap.Pixel 类型
+      var pixel = ev.pixel;
+
+      // 触发事件类型
+      var type = ev.type;
+      // console.log(ev);
+    });
+  </script>
+</body>
+
+</html>

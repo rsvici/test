@@ -1,0 +1,160 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+  <title>glTF 模型</title>
+  <style>
+    html,
+    body,
+    #container {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .cc {
+      position: absolute;
+      color: #000000;
+      bottom: 10px;
+      left: 10px;
+    }
+  </style>
+  <script>
+    delete window.AMap;
+  </script>
+</head>
+
+<body>
+  <div id="container"></div>
+  <script src="https://webapi.amap.com/maps?v=1.4.10&key=466fd4af47506ed3bdce5970ab4cb2a8&plugin=Map3D"></script>
+  <script>
+    // 创建地图实例
+    var map = new AMap.Map("container", {
+      viewMode: '3D',
+      pitch: 55,
+      zoom: 20,
+      center: [121.424624, 31.220367],
+      mapStyle: 'amap://styles/normal',
+      showIndoorMap: true,
+      buildingAnimation: true,
+      resizeEnable: true,
+    });
+
+    
+    // // 设置光照属性/
+    // map.AmbientLight = new AMap.Lights.AmbientLight([1, 1, 1], 0.9);
+    // map.DirectionLight = new AMap.Lights.DirectionLight([0, -1, 1], [1, 1, 1], 0.1);
+    // // // 创建Object3DLayer图层
+
+    // var object3Dlayer = new AMap.Object3DLayer();
+    // map.add(object3Dlayer);
+
+
+    // var bounds = [
+    //   new AMap.LngLat(121.424624, 31.220367),
+    //   new AMap.LngLat(121.425830, 31.220367),
+    //   new AMap.LngLat(121.425830, 31.221380),
+    //   new AMap.LngLat(121.424624, 31.221380)
+    // ];
+    // var height = 1;
+    // var color = '#bbffff'; //rgba
+    // var prism = new AMap.Object3D.Prism({
+    //   path: bounds,
+    //   height: height,
+    //   color: color
+    // });
+    // object3Dlayer.add(prism); //添加
+
+
+    var district = null;
+    var polygons = [];
+
+    function drawBounds() {
+      //加载行政区划插件
+      if (!district) {
+        //实例化DistrictSearch
+        var opts = {
+          subdistrict: 0, //获取边界不需要返回下级行政区
+          extensions: 'all', //返回行政区边界坐标组等具体信息
+          level: 'district' //查询行政级别为 市
+        };
+        district = new AMap.DistrictSearch(opts);
+      }
+      //行政区查询
+      district.setLevel('长宁区')
+      district.search('长宁区', function (status, result) {
+        map.remove(polygons) //清除上次结果
+        polygons = [];
+        var bounds = result.districtList[0].boundaries;
+        console.log(bounds);
+        console.log(JSON.stringify(bounds));
+        if (bounds) {
+
+          for (var i = 0, l = bounds.length; i < l; i++) {
+            //生成行政区划polygon
+            var polygon = new AMap.Polygon({
+              strokeWeight: 1,
+              path: bounds[i],
+              fillOpacity: 0.4,
+              fillColor: '#80d8ff',
+              strokeColor: '#0091ea'
+            });
+            polygons.push(polygon);
+          }
+        }
+        map.add(polygons)
+        map.setFitView(polygons); //视口自适应
+      });
+    }
+    drawBounds();
+
+    // map.plugin(["AMap.GltfLoader"], function () {
+    //   var urlCity = 'https://a.amap.com/jsapi_demos/static/gltf-online/shanghai/scene.gltf';
+    //   var urlDuck = './h_lbs_b360768dedbb487300974beda8fa0e48.gltf';
+    //   var paramCity = {
+    //     position: new AMap.LngLat(121.510909, 31.233366), // 必须
+    //     scale: 3580, // 非必须，默认1
+    //     height: 1800, // 非必须，默认0
+    //     scene: 0, // 非必须，默认0
+    //   };
+
+    //   var paramDuck = {
+    //     position: new AMap.LngLat(121.495000, 31.233366), // 必须
+    //     scale: 800, // 非必须，默认1
+    //     height: -100, // 非必须，默认0
+    //     scene: 0, // 非必须，默认0
+    //   };
+
+    //   var gltfObj = new AMap.GltfLoader();
+
+    //   gltfObj.load(urlCity, function (gltfCity) {
+    //     gltfCity.setOption(paramCity);
+    //     gltfCity.rotateX(90);
+    //     gltfCity.rotateZ(120);
+    //     object3Dlayer.add(gltfCity);
+    //   });
+
+    //   gltfObj.load(urlDuck, function (gltfDuck) {
+    //     gltfDuck.setOption(paramDuck);
+    //     gltfDuck.rotateX(90);
+    //     gltfDuck.rotateZ(-20);
+    //     object3Dlayer.add(gltfDuck);
+    //   });
+
+    // });
+
+    // map.on('zoomend', function (e) {
+    //   if (map.getZoom() > 16) {
+    //     object3Dlayer.remove(prism);
+    //   } else {
+    //     object3Dlayer.add(prism);
+    //   }
+    // });
+  </script>
+</body>
+
+</html>

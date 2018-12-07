@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="http://www.softwhy.com/" />
+  <title>蚂蚁部落</title>
+</head>
+
+<body>
+  <div style="margin-left: 100px">
+      <img src="../1.jpg">
+  </div>
+  <script>
+    (function () {
+      var img = document.querySelector('img');
+      img.style.cursor = 'pointer';
+      img.onclick = function () {
+        img.style.position = 'relative';
+        setTimeout(function () {
+          rock(-2, img)
+        }, 100);
+        setTimeout(function () {
+          rock(0, img)
+        }, 200);
+        setTimeout(function () {
+          rock(2, img)
+        }, 300);
+        setTimeout(function () {
+          rock(0, img)
+        }, 400);
+        setTimeout(function () {
+          explode(16, 8, img)
+        }, 500);
+
+        function rock(param, img) {
+          img.style.top = param + 'px';
+          img.style.left = param + 'px';
+        }
+
+        function explode(row, col, img) {
+          var divs = document.createElement('div');
+          var styleDivs = {};
+          styleDivs.width = img.width + 'px';
+          styleDivs.height = img.height + 'px';
+          styleDivs.position = 'relative';
+          for (var i in styleDivs)
+            divs.style[i] = styleDivs[i];
+
+          for (var i = 0; i < col; i++) {
+            for (var j = 0; j < row; j++) {
+              var div = document.createElement('div');
+              var styleDiv = {};
+              styleDiv.position = 'absolute';
+              styleDiv.left = img.width / row * j + 'px';
+              styleDiv.top = img.height / col * i + 'px';
+              styleDiv.width = img.width / row + 'px';
+              styleDiv.height = img.height / col + 'px';
+              styleDiv.backgroundImage = 'url(' + img.src + ')';
+              styleDiv.backgroundRepeat = 'no-repeat';
+              styleDiv.backgroundPosition = -img.width / row * j + 'px ' + -img.height / col * i + 'px';
+              styleDiv.borderRadius = '50%';
+              var scale = 1 + Math.round(10 * Math.random()) * 0.1;
+              styleDiv.transform = 'scale(' + scale + ')';
+              styleDiv.boxShadow = '2px 2px 2px';
+              for (var s in styleDiv)
+                div.style[strike] = styleDiv[strike];
+              divs.appendChild(div);
+            }
+          }
+          img.parentNode.replaceChild(divs, img);
+          img.style.display = 'none';
+          var traces = [];
+          for (var i = 0; i < row * col; i++) {
+            var obj = {
+              a: null,
+              b: null,
+              c: null
+            };
+            obj.a = 0.001 * Math.round(10 * Math.random());
+            obj.b = 0.1;
+            obj.c = Math.random() > 0.5 ? -Math.round(10 * Math.random()) : Math.round(10 * Math.random());
+            traces.push(obj);
+          }
+          var index = 0;
+          var interval = setInterval(function () {
+            var childs = divs.childNodes;
+            for (var i = 0; i < childs.length; i++) {
+              var child = childs[i];
+              var trace = traces[i];
+              if (child.offsetLeft > divs.offsetWidth / 2)
+                child.style.left = child.offsetLeft + index * 2 + trace.c + 'px';
+              else
+                child.style.left = child.offsetLeft - index * 2 + trace.c + 'px';
+              if (i < row * col / 2)
+                child.style.top = child.offsetTop - trace.a * Math.pow(index, 2) - trace.b * index + trace.c +
+                'px';
+              else
+                child.style.top = child.offsetTop + trace.a * Math.pow(index, 2) + trace.b * index + trace.c +
+                'px';
+              child.style.opacity = 1 - index * 0.1;
+            }
+            index++;
+            if (index == 11) {
+              clearInterval(interval);
+              divs.innerHTML = '';
+            }
+          }, 100);
+        }
+      }
+    })();
+  </script>
+</body>
+
+</html>
