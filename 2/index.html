@@ -27,6 +27,10 @@
     .amap-copyright {
       display: none !important;
     }
+
+    .amap-marker-label {
+      border: none;
+    }
   </style>
   <script>
     delete window.AMap;
@@ -48,6 +52,8 @@
       buildingAnimation: true,
       showIndoorMap: true,
       indoorMap: true,
+      showBuildingBlock: true,
+      rotation: 90
     });
 
 
@@ -86,21 +92,36 @@
 
     // 添加模型
     map.plugin(["AMap.GltfLoader"], function () {
-      var hqyszx = './gltf/hqyszx.gltf';
-      var paramCity = {
+      var urlHqyszx = './gltf/hqyszx.gltf';
+      var urlBsyk = './gltf/bsyk.gltf';
+      var positionHqyszx = {
         position: new AMap.LngLat(121.40396, 31.211692),
         scale: 18,
         height: 120,
         scene: 0
       };
+      var positionBsyk = {
+        position: new AMap.LngLat(121.403260, 31.210697),
+        scale: 70,
+        height: 0,
+        scene: 0
+      };
 
       var gltfObj = new AMap.GltfLoader();
 
-      gltfObj.load(hqyszx, function (gltfCity) {
-        gltfCity.setOption(paramCity);
+      gltfObj.load(urlHqyszx, function (gltfCity) {
+        gltfCity.setOption(positionHqyszx);
         gltfCity.rotateX(90);
         gltfCity.rotateY(0);
         gltfCity.rotateZ(0);
+        object3Dlayer.add(gltfCity);
+      });
+
+      gltfObj.load(urlBsyk, function (gltfCity) {
+        gltfCity.setOption(positionBsyk);
+        gltfCity.rotateX(90);
+        gltfCity.rotateY(0);
+        gltfCity.rotateZ(190);
         object3Dlayer.add(gltfCity);
       });
 
@@ -115,17 +136,35 @@
     });
 
     // 标识点
+    // 虹桥艺术中心
     var hqyszxMarker = new AMap.Marker({
       map: map,
       icon: "https://webapi.amap.com/theme/v1.3/markers/n/mark_b.png",
       position: [121.40396, 31.211692],
       height: 350,
     });
+
+    // 百盛优客
+    var baskMarker = new AMap.Marker({
+      map: map,
+      icon: "https://webapi.amap.com/theme/v1.3/markers/n/mark_b.png",
+      position: [121.403260, 31.210697],
+      height: 600,
+    });
+
+    // 虹桥艺术中心
     hqyszxMarker.setLabel({
       //修改label相对于maker的位置
       offset: new AMap.Pixel(-30, 31),
       content: "<div class='info'>虹桥艺术中心</div>"
     });
+    // 百盛优客
+    baskMarker.setLabel({
+      //修改label相对于maker的位置
+      offset: new AMap.Pixel(-40, 31),
+      content: "<div class='info'>百盛优客城市广场</div>"
+    });
+
 
     function showInfoM(e) {
 
