@@ -46,8 +46,8 @@
     var map = new AMap.Map("container", {
       viewMode: '3D',
       pitch: 70,
-      zoom: 18,
-      center: [121.404058,31.211158],
+      zoom: 17.5,
+      center: [121.404058, 31.211158],
       mapStyle: 'amap://styles/normal',
       buildingAnimation: true,
       showIndoorMap: true,
@@ -67,6 +67,7 @@
 
     // 设置边界
     var prism = [];
+    var meshLine = [];
 
     function drawBounds() {
       $.getJSON("map.json", function (resjson) {
@@ -79,13 +80,22 @@
         }
 
         var height = 1000;
-        var color = 'rgba(100,255,255, 0.7)'; //rgba
+        var color = 'rgba(100,255,255, 0.1)'; //rgba
         prism = new AMap.Object3D.Prism({
+
           path: boundobj,
           height: height,
           color: color,
         });
         prism.transparent = true;
+
+        meshLine = new AMap.Object3D.MeshLine({
+          path: boundobj,
+          color: 'rgba(55,129,240, 0.9)',
+          width: 5,
+          height:10
+        });
+
       });
     }
     drawBounds();
@@ -157,7 +167,7 @@
       map: map,
       icon: "https://webapi.amap.com/theme/v1.3/markers/n/mark_b.png",
       position: [121.40396, 31.211692],
-      height: 400,
+      height: 380,
     });
     hqyszxMarker.setLabel({
       //修改label相对于maker的位置
@@ -191,21 +201,48 @@
       content: "<div class='info'>汇金百货</div>"
     });
 
-
+    // 巴黎春天
+    var hjbhMarker = new AMap.Marker({
+      map: map,
+      icon: "https://webapi.amap.com/theme/v1.3/markers/n/mark_b.png",
+      position: [121.405055, 31.211506],
+      height: 350,
+    });
+    hjbhMarker.setLabel({
+      //修改label相对于maker的位置
+      offset: new AMap.Pixel(-20, 31),
+      content: "<div class='info'>汇金百货</div>"
+    });
 
 
     function showInfoM(e) {
-
+      window.location.href = "http://www.beerqi.com/changning/#/shopinfo?shopId=2";
     }
     hqyszxMarker.on('click', showInfoM);
+    baskMarker.on('click', showInfoM);
+    hjbhMarker.on('click', showInfoM);
 
 
     // 放大缩小事件
     map.on('zoomend', function (e) {
+
       if (map.getZoom() > 16) {
         object3Dlayer.remove(prism);
+        object3Dlayer.remove(meshLine);
+        
       } else {
         object3Dlayer.add(prism);
+        object3Dlayer.add(meshLine);
+      }
+
+      if (map.getZoom() > 17.5) {
+        $('.amap-marker-label').css({
+          display: 'block'
+        });
+      } else {
+        $('.amap-marker-label').css({
+          display: 'none'
+        });
       }
     });
 

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>demo</title>
+  <style type="text/css">
+    div {
+      width: 300px;
+      height: 100px;
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box1">
+    box1
+  </div>
+  <div class="box2">
+    box2
+  </div>
+</body>
+
+</html>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+  crossorigin="anonymous"></script>
+<script type="text/javascript">
+  var publicClass = function () {
+    this.demo1 = function () {
+      console.log('demo1')
+    }
+  }
+  // 实例化demo
+  var demo = new publicClass();
+  $('.box1').click(function () {
+    demo.demo1();
+  })
+
+  // 添加demo3
+  demo.__proto__.demo2 = function () {
+    console.log('demo2')
+  }
+  // 添加demo4
+  publicClass.prototype.demo3 = function () {
+    console.log('demo3')
+  }
+
+  // 实例化demoo
+  var demoo = new publicClass();
+  $('.box2').click(function () {
+    demoo.demo2();
+    demoo.demo3();
+  })
+
+  console.log('类原型', publicClass.prototype);
+  console.log('实例化类原型', demoo.__proto__);
+  console.log('类', publicClass);
+</script>

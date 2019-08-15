@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>demo</title>
+  <style type="text/css">
+    div {
+      width: 300px;
+      height: 100px;
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box1">
+    box1
+  </div>
+  <div class="box2">
+    box2
+  </div>
+</body>
+
+</html>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+  crossorigin="anonymous"></script>
+<script type="text/javascript">
+  var publicClass = {
+    demo1() {
+      console.log('demo1')
+    }
+  }
+
+  $('.box1').click(function () {
+    publicClass.demo1();
+  })
+
+  // 添加demo2
+  publicClass.demo2 = function () {
+    console.log('demo2')
+  }
+
+  $('.box2').click(function () {
+    publicClass.demo2();
+  })
+
+  console.log(publicClass);
+</script>
