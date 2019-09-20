@@ -1,0 +1,26 @@
+{
+  "name": "rsvici_test",
+  "version": "1.0.0",
+  "description": "node测试",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rsvici/node_test.git"
+  },
+  "keywords": [
+    "node"
+  ],
+  "author": "rsvici",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rsvici/node_test/issues"
+  },
+  "homepage": "https://github.com/rsvici/node_test#readme"
+}
